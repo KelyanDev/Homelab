@@ -76,11 +76,16 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 #### Monitoring
 As my monitoring service, I intend to use Grafana with either Prometheus or InfluxDB (I'm still not sure what I want to use)
 
+### Proxy
+As my proxy and certificates manager, I intend to use Nginx Proxy Manager
+
+### DNS Sinkhole
+As my DNS, I intend to try and experiment with Pi-hole
 
 ### Experimental
 For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
 * AD DS/DNS server - To experiment a more "enterprise" infrastructure, and also used to experiment with my Veeam server
-* Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work?
+* Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
