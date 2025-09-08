@@ -61,8 +61,6 @@ In this github repository, I'll centralize all of the informations regarding my 
 
 This project is, of course, still **Work In Progress**
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ### Infrastructure
 
@@ -71,9 +69,6 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * Ryzen 7 8845HS - 8 cores, 16 threads
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ### Services
@@ -87,6 +82,7 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 * AD DS/DNS server - To experiment a more "enterprise" infrastructure, and also used to experiment with my Veeam server
 * Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work?
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
