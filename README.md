@@ -1,17 +1,17 @@
 <a id="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
+<!--[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-<!--[![MIT License][license-shield]][license-url]
+[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/KelyanDev/Homelab">
-    <img src="" alt="Logo" width="100" height="100">
+    <img src="images/logo.png" alt="Logo" width="160" height="160">
   </a>
 
 <h3 align="center">Homelab</h3>
@@ -25,8 +25,6 @@
     <a href="https://github.com/KelyanDev/Homelab">View Demo</a>
     ·
     <a href="https://github.com/KelyanDev/Homelab/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    ·
-    <a href="https://github.com/KelyanDev/Homelab/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -58,7 +56,7 @@ In this github repository, I'll centralize all of the informations regarding my 
 
 > What is a Homelab ?
 >
-> Homelab is a laboratory at home where you can self-host, experiment with new technologies, practice for certifications, and so on.
+> A Homelab is a laboratory at home where you can self-host, experiment with new technologies, practice for certifications, and so on.
 > For more information, please check the [r/homelab introduction](https://www.reddit.com/r/homelab/wiki/introduction/)
 
 This project is, of course, still **Work In Progress**
@@ -66,9 +64,13 @@ This project is, of course, still **Work In Progress**
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
 ### Infrastructure
 
+#### SER8 (Proxmox)  
+This machine is running my Proxmox server. Handling my windows servers, as well as my different services running on containers.
+* Ryzen 7 8845HS - 8 cores, 16 threads
+* 32Go DDR5 5600 MHz
+* 1To NVMe SSD
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -76,20 +78,41 @@ This project is, of course, still **Work In Progress**
 
 ### Services
 
+#### Monitoring
+As my monitoring service, I intend to use Grafana with either Prometheus or InfluxDB (I'm still not sure what I want to use)
+
+
+### Experimental
+For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
+* AD DS/DNS server - To experiment a more "enterprise" infrastructure, and also used to experiment with my Veeam server
+* Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work?
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [X] Proxmox configuration
-- [ ] Observability
+### Services roadmap
+
+- [X] Proxmox VE configuration
+- [ ] Metric collector / Monitoring
     - [ ] Monitoring
     - [ ] Logging
     - [ ] Alerting
 - [ ] Backup solutions
     - [ ] Veeam server configuration
+    - [ ] Proxmox Backup Server
+- [ ] Dashboard
+- [ ] Proxy manager
+    - [ ] Certificates manager
+- [ ] DNS Sinkhole
+- [ ] VPN
+- [ ] Self hosted cloud
 
-See the [open issues](https://github.com/KelyanDev/Homelab/issues) for a full list of proposed features (and known issues).
+### Physical infrastructure roadmap
+
+- [X] Proxmox server
+- [ ] Switch
+- [ ] NAS
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -107,9 +130,9 @@ Project Link: [https://github.com/KelyanDev/Homelab](https://github.com/KelyanDe
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [Firebase Documentation](https://firebase.google.com/docs)
-* [Android Development Documentations](https://developer.android.com/develop)
-* [Twitter UI Screen (figma)](https://www.figma.com/design/PRfjPuuzAXYc3eQWx9KMlr/Twitter-UI-Screens-(Community)?node-id=4-1224&p=f&t=VcyvTjw6kGAHEOSD-0)
+* [Proxmox Documentation](https://pve.proxmox.com/wiki/Main_Page)
+* [Grafana's Documentation](https://grafana.com/docs/)
+* [TechHutTV's Homelab & Documentations](https://github.com/TechHutTV/homelab)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
