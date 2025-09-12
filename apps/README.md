@@ -8,5 +8,9 @@ In this page, you'll find every general informations regarding all of the differ
 ## Metrics & Monitoring
 
 ### Grafana
-<img src="images/grafana_dashboard.png" alt="Logo" width="1200"/>
+<img src="images/grafana_dashboard.png" alt="Logo" width="1000"/>
+
+Grafana is a stunning dashboard tool that can translate various databases into beautiful graphs, charts, and presentation
+
+**[WIP]**
 
