@@ -8,5 +8,5 @@ In this page, you'll find every general informations regarding all of the differ
 ## Metrics & Monitoring
 
 ### Grafana
-<img src="/images/grafana_dashboard.png" alt="Logo" width="160"/>
+<img src="images/grafana_dashboard.png" alt="Logo" width="160"/>
 
