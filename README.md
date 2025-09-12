@@ -60,8 +60,8 @@ In this github repository, I'll centralize all of the informations regarding my 
 > For more information, please check the [r/homelab introduction](https://www.reddit.com/r/homelab/wiki/introduction/)
 
 This project is, of course, still **Work In Progress**
-
-
+<br />
+   
 ### Infrastructure
 
 #### SER8 (Proxmox)  
@@ -70,11 +70,12 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
 
+<br />
 
 ### Services
 
-#### Monitoring
-As my monitoring service, I intend to use Grafana with either Prometheus or InfluxDB (I'm still not sure what I want to use)
+#### Metrics & Monitoring
+Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
 
 #### Proxy
 As my proxy and certificates manager, I intend to use Nginx Proxy Manager
@@ -96,9 +97,10 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 
 - [X] Proxmox VE configuration
 - [ ] Metric collector / Monitoring
-    - [ ] Monitoring
-    - [ ] Logging
-    - [ ] Alerting
+    - [X] InfluxDB2
+    - [X] Grafana
+    - [ ] Custom Dashboard
+    - [ ] Deployment scripts
 - [ ] Backup solutions
     - [ ] Veeam server configuration
     - [ ] Proxmox Backup Server
@@ -112,8 +114,16 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 ### Physical infrastructure roadmap
 
 - [X] Proxmox server
+    - [X] Proxmox node
+    - [ ] Proxmox cluster 
 - [ ] Switch
 - [ ] NAS
+- [ ] Surveillance
+    - [ ] IP Cameras
+    - [ ] Surveillance server 
+- [ ] Other ideas
+    - [ ] Cooling system ?
+    - [ ] Full solar energy ? 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,7 +142,9 @@ Project Link: [https://github.com/KelyanDev/Homelab](https://github.com/KelyanDe
 ## Acknowledgments
 
 * [Proxmox Documentation](https://pve.proxmox.com/wiki/Main_Page)
+* [Proxmox VE Helper scripts](https://community-scripts.github.io/ProxmoxVE/)
 * [Grafana's Documentation](https://grafana.com/docs/)
+* [InfluxDB's Documentation](https://docs.influxdata.com/influxdb/v2/install/#choose-the-influxdata-key-pair-for-your-os-version)
 * [TechHutTV's Homelab & Documentations](https://github.com/TechHutTV/homelab)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
