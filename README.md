@@ -22,9 +22,6 @@
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/KelyanDev/Homelab">View Demo</a>
-    ·
-    <a href="https://github.com/KelyanDev/Homelab/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
   </p>
 </div>
 
@@ -41,7 +38,13 @@
         <li><a href="#services">Services</a></li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#roadmap">Roadmap</a>
+      <ul>
+        <li><a href="#Services-roadmap"></a>Services roadmpa</li>
+        <li><a href="#Physical-infrastructure-roadmap"></a>Hardware roadmap</li>
+      </ul>u
+    </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -60,7 +63,7 @@ In this github repository, I'll centralize all of the informations regarding my 
 > For more information, please check the [r/homelab introduction](https://www.reddit.com/r/homelab/wiki/introduction/)
 
 This project is, of course, still **Work In Progress**
-<br />
+
    
 ### Infrastructure
 
@@ -70,9 +73,10 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
 
-<br />
 
 ### Services
+
+If you want more informations / documentations about any of these services, please refer to the [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) section
 
 #### Metrics & Monitoring
 Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
@@ -120,10 +124,7 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 - [ ] NAS
 - [ ] Surveillance
     - [ ] IP Cameras
-    - [ ] Surveillance server 
-- [ ] Other ideas
-    - [ ] Cooling system ?
-    - [ ] Full solar energy ? 
+- [ ] Other improvements
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
