@@ -76,7 +76,9 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 
 ### Services
 
-If you want more informations / documentations about any of these services, please refer to the [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) section
+>[!TIP]
+> If you want more informations / documentations about any of these services, please refer to the [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) section
+> I'll try to do my own deployment scripts in a near future   
 
 #### Metrics & Monitoring
 Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
