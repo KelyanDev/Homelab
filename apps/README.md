@@ -8,9 +8,30 @@ In this page, you'll find every general informations regarding all of the differ
 ## Metrics & Monitoring
 
 ### Grafana
-<img src="images/grafana_dashboard.png" alt="Logo" width="1000"/>
 
-Grafana is a stunning dashboard tool that can translate various databases into beautiful graphs, charts, and presentation
+Grafana is a stunning dashboard tool that can translate various databases and showcase it into beautiful graphs, charts, or even presentations. There is a ton of custom dashboard created by the community for different use cases, and it can integrates with a lot of tech stacks. You can easily add a connection and import a dashboard to display the data.
 
-**[WIP]**
+<div align="center">
+  <br />
+  <img src="images/grafana_dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+#### Configuration & Installation
+The best way I found to install Grafana is by running it inside Docker. At first, I tried using it inside a basic LXC container on my proxmox, but the service wasn't able to start because the container's root user isn't enough for systemd "sandboxing". I didn't want to run a privileged container for Grafana, so I chose the Docker option instead.
+
+You can find various documentations / youtube videos to help you install Docker and Grafana on Linux. I personally chose Debian, but you can chose whatever Linux distribution you want that can run Docker & Grafana
+
+### InfluxDB2
+
+InfluxDB is an open-source time series database designed for high-speed ingestion and efficient querying of time-stamped data. This database tool is also capable of displaying the data into charts and graphs, but I'm mainly using it to gather metrics from my Proxmox server, before pulling it to Grafana dashboards
+
+<div align="center">
+  <br />
+  <img src="images/influxdb_dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+#### Configuration & Installation
+
 
