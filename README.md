@@ -41,9 +41,9 @@
     <li>
       <a href="#roadmap">Roadmap</a>
       <ul>
-        <li><a href="#Services-roadmap"></a>Services roadmpa</li>
-        <li><a href="#Physical-infrastructure-roadmap"></a>Hardware roadmap</li>
-      </ul>u
+        <li><a href="#services-roadmap">Services roadmap</a></li>
+        <li><a href="#physical-infrastructure-roadmap">Hardware roadmap</a></li>
+      </ul>
     </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
