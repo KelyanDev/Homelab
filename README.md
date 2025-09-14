@@ -27,29 +27,13 @@
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#infrastructure">Infrastructure</a></li>
-        <li><a href="#services">Services</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#roadmap">Roadmap</a>
-      <ul>
-        <li><a href="#services-roadmap">Services roadmap</a></li>
-        <li><a href="#physical-infrastructure-roadmap">Hardware roadmap</a></li>
-      </ul>
-    </li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
 
+
+### Navigation
+> [General](https://github.com/KelyanDev/Homelab) - All the general informations regarding my Homelab   
+> [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) - List of all the current services I'm running   
+
+<br />
 
 
 <!-- ABOUT THE PROJECT -->
@@ -57,6 +41,7 @@
 
 In this github repository, I'll centralize all of the informations regarding my current homelab setup (from hardware to software), my goals regarding it, aswell as some reusable configuration files.
 
+>[!IMPORTANT]
 > What is a Homelab ?
 >
 > A Homelab is a laboratory at home where you can self-host, experiment with new technologies, practice for certifications, and so on.
@@ -64,7 +49,6 @@ In this github repository, I'll centralize all of the informations regarding my 
 
 This project is, of course, still **Work In Progress**
 
-   
 ### Infrastructure
 
 #### SER8 (Proxmox)  
@@ -73,12 +57,9 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
 
+<br />
 
 ### Services
-
->[!TIP]
-> If you want more informations / documentations about any of these services, please refer to the [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) section
-> I'll try to do my own deployment scripts in a near future   
 
 #### Metrics & Monitoring
 Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
@@ -116,6 +97,8 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 - [ ] DNS Sinkhole
 - [ ] VPN
 - [ ] Self hosted cloud
+
+<br />
 
 ### Physical infrastructure roadmap
 
