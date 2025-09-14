@@ -29,7 +29,7 @@
 
 
 
-> **NAVIGATION**
+> **Navigation**
 >
 > [General](https://github.com/KelyanDev/Homelab) - All the general informations regarding my Homelab   
 > [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) - List of all the current services I'm running   
