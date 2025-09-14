@@ -22,19 +22,36 @@
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/README.md">Apps</a>
+    ·
+    <a href="">WIP</a>
+    ·
+    <a href="">WIP</a>
   </p>
 </div>
 
 
-
-
-
-> **Navigation**
->
-> [General](https://github.com/KelyanDev/Homelab) - All the general informations regarding my Homelab   
-> [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) - List of all the current services I'm running   
-
-<br />
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#services">Services</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#roadmap">Roadmap</a>
+      <ul>
+        <li><a href="#services-roadmap">Services roadmap</a></li>
+        <li><a href="#physical-infrastructure-roadmap">Hardware roadmap</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details> 
 
 
 <!-- ABOUT THE PROJECT -->
@@ -50,6 +67,8 @@ In this github repository, I'll centralize all of the informations regarding my 
 
 This project is, of course, still **Work In Progress**
 
+<hr />
+
 ### Infrastructure
 
 #### SER8 (Proxmox)  
@@ -58,7 +77,7 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
 
-<br />
+<hr />
 
 ### Services
 
@@ -99,7 +118,7 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 - [ ] VPN
 - [ ] Self hosted cloud
 
-<br />
+<hr />
 
 ### Physical infrastructure roadmap
 
