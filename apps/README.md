@@ -1,11 +1,21 @@
-# Services
+<h3 align="center">Services</h3>
 
-In this page, you'll find every general informations regarding all of the different services that I'm currently running on my Homelab. These services can go from the most basic Windows server to more specific ones such as my data and metrics monitoring services. Each service will (probably) have its own set of scripts and general informations on how to run them, even if I'm still not sure how I'll globally organize the repository
-
-> **Navigation**
-> 
-> [General](https://github.com/KelyanDev/Homelab) - All the general informations regarding my Homelab   
-> [Apps](https://github.com/KelyanDev/Homelab/blob/main/apps/README.md) - List of all the current services I'm running
+  <p align="center">
+    In this page, you'll find avery general informations regarding all of the different services that I'm currently running on my Homelab. Each service will (probably) have its own set of scripts and general informations on how to run them, even if I'm not sure how to organize it yet
+    <br />
+    <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    Navigation <br />
+    <a href="https://github.com/KelyanDev/Homelab">General</a>
+    ·
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/README.md">Apps</a>
+    ·
+    <a href="">WIP</a>
+    ·
+    <a href="">WIP</a>
+  </p>
+</div>
 
 ## Metrics & Monitoring
 
