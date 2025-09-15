@@ -22,6 +22,9 @@
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
     <br />
     <br />
+    Navigation <br />
+    <a href="https://github.com/KelyanDev/Homelab">General</a>
+    ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/README.md">Apps</a>
     ·
     <a href="">WIP</a>
