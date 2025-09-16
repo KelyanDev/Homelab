@@ -62,7 +62,6 @@
 
 In this github repository, I'll centralize all of the informations regarding my current homelab setup (from hardware to software), my goals regarding it, aswell as some reusable configuration files.
 
->[!IMPORTANT]
 > What is a Homelab ?
 >
 > A Homelab is a laboratory at home where you can self-host, experiment with new technologies, practice for certifications, and so on.
@@ -79,6 +78,7 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * Ryzen 7 8845HS - 8 cores, 16 threads
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
+* 2.5 Gbps LAN 
 
 <hr />
 
