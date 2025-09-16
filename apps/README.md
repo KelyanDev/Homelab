@@ -45,5 +45,29 @@ InfluxDB is an open-source time series database designed for high-speed ingestio
 </div>
 
 #### Configuration & Installation
-
-
+Here's the installation steps to install InfluxDB on a freshly configured LXC container running Debian 12 - These steps assume that you are using the root user
+```
+# Update packages:
+apt update && apt upgrade -y
+# Install curl and gpg for the next command
+apt install curl gpg
+# Add the InfluxData key to verify downloads and add the repository:
+curl --silent --location -O https://repos.influxdata.com/influxdata-archive.key
+gpg --show-keys --with-fingerprint --with-colons ./influxdata-archive.key 2>&1 \
+| grep -q '^fpr:\+24C975CBA61A024EE1B631787C3D57159FC2F927:$' \
+&& cat influxdata-archive.key \
+| gpg --dearmor \
+| tee /etc/apt/keyrings/influxdata-archive.gpg > /dev/null \
+&& echo 'deb [signed-by=/etc/apt/keyrings/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
+| tee /etc/apt/sources.list.d/influxdata.list
+# Finally, update your packages and install influxdb
+apt update && apt install influxdb2 -y
+```
+Once all these steps are done and the installation proceeded, you are safe to start the service. Don't forget to enable it if you want it to start when the LXC containers start
+```
+# Enable the service:
+systemctl enable influxdb
+# Start the service
+systemctl start influxdb
+```
+Then, you can start to configure your InfluxDB.
