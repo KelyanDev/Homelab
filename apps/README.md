@@ -29,10 +29,13 @@ Grafana is a stunning dashboard tool that can translate various databases and sh
   <br />
 </div>
 
-#### Configuration & Installation
-The best way I found to install Grafana is by running it inside Docker. At first, I tried using it inside a basic LXC container on my proxmox, but the service wasn't able to start because the container's root user isn't enough for systemd "sandboxing". I didn't want to run a privileged container for Grafana, so I chose the Docker option instead.
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/grafana/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/grafana/grafana">GitHub</a>
+</div>
 
-You can find various documentations / youtube videos to help you install Docker and Grafana on Linux. I personally chose Debian, but you can chose whatever Linux distribution you want that can run Docker & Grafana
+<br />
 
 ### InfluxDB2
 
@@ -44,30 +47,8 @@ InfluxDB is an open-source time series database designed for high-speed ingestio
   <br />
 </div>
 
-#### Configuration & Installation
-Here's the installation steps to install InfluxDB on a freshly configured LXC container running Debian 12 - These steps assume that you are using the root user
-```
-# Update packages:
-apt update && apt upgrade -y
-# Install curl and gpg for the next command
-apt install curl gpg
-# Add the InfluxData key to verify downloads and add the repository:
-curl --silent --location -O https://repos.influxdata.com/influxdata-archive.key
-gpg --show-keys --with-fingerprint --with-colons ./influxdata-archive.key 2>&1 \
-| grep -q '^fpr:\+24C975CBA61A024EE1B631787C3D57159FC2F927:$' \
-&& cat influxdata-archive.key \
-| gpg --dearmor \
-| tee /etc/apt/keyrings/influxdata-archive.gpg > /dev/null \
-&& echo 'deb [signed-by=/etc/apt/keyrings/influxdata-archive.gpg] https://repos.influxdata.com/debian stable main' \
-| tee /etc/apt/sources.list.d/influxdata.list
-# Finally, update your packages and install influxdb
-apt update && apt install influxdb2 -y
-```
-Once all these steps are done and the installation proceeded, you are safe to start the service. Don't forget to enable it if you want it to start when the LXC containers start
-```
-# Enable the service:
-systemctl enable influxdb
-# Start the service
-systemctl start influxdb
-```
-Then, you can start to configure your InfluxDB.
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/influxdb/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/influxdata/influxdb">GitHub</a>
+</div>
