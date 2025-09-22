@@ -55,3 +55,10 @@ chmod -R 755 /opt/grafana/data
 ```
 Then, you can start to configure your Grafana. It usually runs on the port 3000, so if you configured yours correctly and applied the port, you should be able to access it directly from here
 
+## Dashboard
+
+You can find my custom dashboard here:
+[Dashboard](https://github.com/KelyanDev/Homelab/blob/main/apps/grafana/proxmox-ve.json)
+
+Here's the original Dashboard I used; It is almost the same, I just tweaked some things here and there:
+[Original](https://grafana.com/grafana/dashboards/23164-proxmox-ve/)
