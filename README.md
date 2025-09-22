@@ -87,11 +87,23 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 #### Metrics & Monitoring
 Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
 
-#### Proxy
-As my proxy and certificates manager, I intend to use Nginx Proxy Manager
+#### Reverse Proxy
+As my reverse proxy and certificates manager, I intend to use Nginx Proxy Manager
+
+#### Dashboard
+As my main dashboard, I intend to try Homarr
 
 #### DNS Sinkhole
-As my DNS, I intend to try and experiment with Pi-hole
+As my DNS, I intend to try and experiment with Pi-hole, but for now I'll stick with a Windows Server (not ideal I know, but I need one anyway when I have things to do in my studies)
+
+#### Cloud
+As my main cloud service, I intend to try and play around with Nextcloud. I'll also try Immich if I can
+
+#### Backups
+Regarding my Windows servers, I'll play around with Veeam. Regarding my containers, I'll probably mostly use the Proxmox Backup Server
+
+#### Media servers
+I don't know wich one to run yet, but I know that I'll get to it eventually (probably Jellyfin)
 
 #### Experimental
 For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
