@@ -54,5 +54,5 @@ The default user / password is ``admin@example.com`` / ``changeme``
 ## Configuration file
 
 You can find the config file here (or really anywhere on Internet):
-[Config](https://github.com/KelyanDev/Homelab/blob/main/apps/Nginx Proxy Manager/compose.yaml)
+[Config](https://github.com/KelyanDev/Homelab/blob/main/apps/nginx%20proxy%20manager/compose.yaml)
 
