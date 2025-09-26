@@ -19,8 +19,8 @@
 
 ## Installation
 
-There is multiple steps in installing Grafana. These steps assume that you already have a running Debian 12 LXC
-The Grafana documentations can also provide great amount of informations regarding the installation steps, but they assume that you're not using the root user
+There is multiple steps in installing Grafana. These steps assume that you already have a running Debian 12 LXC   
+The Grafana documentations can also provide great amount of informations regarding the installation steps, but they assume that you're not using the root user   
 
 Also, it is not possible to run a simple Grafana service without going with Docker if the LXC container is unprivilegied, because Grafana will have some trouble when trying to start.
 
@@ -39,7 +39,7 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/
 # Finally, update your packages and install docker and its components
 apt update && apt install -y docker-ce docker-ce-cli containerd.io
 ```
-Once all these steps are done and the installation proceeded, you can verify if docker is successfully installed by running ``docker --version``
+Once all these steps are done and the installation proceeded, you can verify if docker is successfully installed by running ``docker --version``   
 Once Docker is finally installed, you just need to create a Grafana container, using the parameters you desire. Here's what I used to create my Grafana's container:
 ```
 # Command to create a Grafana container named "grafana", always restarting unless manually stopped.
@@ -50,8 +50,6 @@ docker run -d --name=grafana --restart=unless-stopped -p 3000:3000 -v /opt/grafa
 mkdir -p /opt/grafana/data
 chown -R grafana:grafana /opt/grafana/data
 chmod -R 755 /opt/grafana/data
-
-# You can also remove the grafana 
 ```
 Then, you can start to configure your Grafana. It usually runs on the port 3000, so if you configured yours correctly and applied the port, you should be able to access it directly from here
 
