@@ -118,18 +118,19 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 ### Services roadmap
 
 - [X] Proxmox VE configuration
-- [ ] Metric collector / Monitoring
+- [X] Metric collector / Monitoring
     - [X] InfluxDB2
     - [X] Grafana
-    - [ ] Custom Dashboard
+    - [X] Custom Dashboard
     - [ ] Deployment scripts
 - [ ] Backup solutions
     - [ ] Veeam server configuration
     - [ ] Proxmox Backup Server
 - [ ] Dashboard
-- [ ] Proxy manager
-    - [ ] Certificates manager
-- [ ] DNS Sinkhole
+- [X] Reverse Proxy
+    - [X] Nginx Proxy Manager
+- [X] DNS Sinkhole
+    - [X] Pi-Hole
 - [ ] VPN
 - [ ] Self hosted cloud
 
