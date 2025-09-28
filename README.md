@@ -166,6 +166,8 @@ Project Link: [https://github.com/KelyanDev/Homelab](https://github.com/KelyanDe
 * [Proxmox VE Helper scripts](https://community-scripts.github.io/ProxmoxVE/)
 * [Grafana's Documentation](https://grafana.com/docs/)
 * [InfluxDB's Documentation](https://docs.influxdata.com/influxdb/v2/install/#choose-the-influxdata-key-pair-for-your-os-version)
+* [Pi-Hole's Documentation](https://docs.pi-hole.net/)
+* [Nginx Proxy Manager's Documentation](https://nginxproxymanager.com/guide/)
 * [TechHutTV's Homelab & Documentations](https://github.com/TechHutTV/homelab)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
