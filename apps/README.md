@@ -17,6 +17,26 @@
   </p>
 </div>
 
+## DNS
+
+### Pi-Hole
+
+Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to protect devices on a private network from unwanted content by blocking certain DNS inquiries. Pi-Hole uses blacklists full of domains. Pi-Hole also has other multiple use cases, as I have personally configured mine as a classic DNS server. I haven't checked all of its functionalities yet, but it is surely a wonderful service to run and play with.
+
+<div align="center">
+  <br />
+  <img src="images/pihole-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
+</div>
+
+<br />
+
 ## Metrics & Monitoring
 
 ### Grafana
@@ -25,7 +45,7 @@ Grafana is a stunning dashboard tool that can translate various databases and sh
 
 <div align="center">
   <br />
-  <img src="images/grafana_dashboard.png" alt="Logo" width="900"/>
+  <img src="images/grafana-dashboard.png" alt="Logo" width="900"/>
   <br />
 </div>
 
@@ -43,7 +63,7 @@ InfluxDB is an open-source time series database designed for high-speed ingestio
 
 <div align="center">
   <br />
-  <img src="images/influxdb_dashboard.png" alt="Logo" width="900"/>
+  <img src="images/influxdb-dashboard.png" alt="Logo" width="900"/>
   <br />
 </div>
 
