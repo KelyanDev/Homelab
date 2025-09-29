@@ -27,7 +27,7 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/README.md">Apps</a>
     ·
-    <a href="">WIP</a>
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Monitoring</a>
     ·
     <a href="">WIP</a>
   </p>
