@@ -23,7 +23,7 @@
     <br />
     <br />
     Navigation <br />
-    <a href="https://github.com/KelyanDev/Homelab">General</a>
+    <a href="https://github.com/KelyanDev/Homelab"><strong>General</strong></a>
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/README.md">Apps</a>
     ·
