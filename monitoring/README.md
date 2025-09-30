@@ -13,6 +13,10 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md"><strong>Monitoring</strong></a>
     ·
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Proxy</a>
+    ·
+    <a href="">WIP</a>
+    ·
     <a href="">WIP</a>
   </p>
 </div>
