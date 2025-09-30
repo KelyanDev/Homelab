@@ -13,6 +13,10 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Monitoring</a>
     ·
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Proxy</a>
+    ·
+    <a href="">WIP</a>
+    ·
     <a href="">WIP</a>
   </p>
 </div>
@@ -21,7 +25,7 @@
 
 ### Pi-Hole
 
-Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to protect devices on a private network from unwanted content by blocking certain DNS inquiries. Pi-Hole uses blacklists full of domains. Pi-Hole also has other multiple use cases, as I have personally configured mine as a classic DNS server. I haven't checked all of its functionalities yet, but it is surely a wonderful service to run and play with.
+Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to protect devices on a private network from unwanted content by blocking certain DNS inquiries, using blacklists full of domains. Pi-Hole also has other multiple use cases, as I have personally configured mine as a classic DNS server. I haven't checked all of its functionalities yet, but it is surely a wonderful service to run and play with.
 
 <div align="center">
   <br />
@@ -50,7 +54,7 @@ Grafana is a stunning dashboard tool that can translate various databases and sh
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/grafana/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Configuration</a>
   ·
   <a href="https://github.com/grafana/grafana">GitHub</a>
 </div>
@@ -68,7 +72,7 @@ InfluxDB is an open-source time series database designed for high-speed ingestio
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/influxdb/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Configuration</a>
   ·
   <a href="https://github.com/influxdata/influxdb">GitHub</a>
 </div>
