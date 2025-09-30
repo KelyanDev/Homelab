@@ -1,7 +1,7 @@
 <h3 align="center">Monitoring</h3>
 
   <p align="center">
-    In this page, you'll find avery general informations regarding all of the different services that I'm currently running on my Homelab. Each service will (probably) have its own set of scripts and general informations on how to run them, even if I'm not sure how to organize it yet
+    Regarding my monitoring stack, I'm running 2 Debian LXC - One running InfluxDB2 without Docker, while the other one is running Grafana in Docker. This repository is my own <strong>WIP</strong> installation guide. Some important aspects such as securing access using SSL/TLS connexions are yet to come.
     <br />
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
     <br />
@@ -17,56 +17,21 @@
   </p>
 </div>
 
-## Grafana
+## Installation
 
-There is multiple steps in installing Grafana. These steps assume that you already have a running Debian 12 LXC   
-The Grafana documentations can also provide great amount of informations regarding the installation steps, but they assume that you're not using the root user   
+These steps assume that you have already configured 2 debian LXC containers, and that you are connected as the root user in them.
 
-Also, it is not possible to run a simple Grafana service without going with Docker if the LXC container is unprivilegied, because Grafana will have some trouble when trying to start.
-
-```
-# Update packages:
-apt update && apt upgrade -y
-
-# Install the dependencies
-apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
-
-# Add the Docker key to verify downloads:
-curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-# Add the Docker depot
-
-# Finally, update your packages and install docker and its components
-apt update && apt install -y docker-ce docker-ce-cli containerd.io
-```
-Once all these steps are done and the installation proceeded, you can verify if docker is successfully installed by running ``docker --version``   
-Once Docker is finally installed, you just need to create a Grafana container, using the parameters you desire. Here's what I used to create my Grafana's container:
-```
-# Command to create a Grafana container named "grafana", always restarting unless manually stopped.
-# Grafana configs / dashboards are stored in /var/lib/grafana, in case the container is deleted.
-docker run -d --name=grafana --restart=unless-stopped -p 3000:3000 -v /opt/grafana/data:/var/lib/grafana grafana/grafana:latest
-
-# If you run Grafana the same way I did, you'll also need to do the following:
-mkdir -p /opt/grafana/data
-chown -R grafana:grafana /opt/grafana/data
-chmod -R 755 /opt/grafana/data
-```
-Then, you can start to configure your Grafana. It usually runs on the port 3000, so if you configured yours correctly and applied the port, you should be able to access it directly from here
-
-## Dashboard
-
-You can find my custom dashboard here:
-[Dashboard](https://github.com/KelyanDev/Homelab/blob/main/apps/grafana/proxmox-ve.json)
-
-Here's the original Dashboard I used; It is almost the same, I just tweaked some things here and there:
-[Original](https://grafana.com/grafana/dashboards/23164-proxmox-ve/)
+The original documentations might as well be a better source of information, depending on your tech stack.
 
 
-## InfluxDB
+### InfluxDB
 
-There is multiple steps in installing InfluxDB. These steps assume that you already have a running Debian 12 LXC
-The InfluxDB documentations can also provide great amount of informations regarding the installation steps, but they assume that you're not using the root user
+> **Specs**
+> - 2 vCpu
+> - 2 GiB memory
+> - 10 GiB storage
 
+These are the initial steps regarding the installation of InfluxDB2 natively.   
 ```
 # Update packages:
 apt update && apt upgrade -y
@@ -88,7 +53,9 @@ gpg --show-keys --with-fingerprint --with-colons ./influxdata-archive.key 2>&1 \
 apt update && apt install influxdb2 -y
 ```
 
-Once all these steps are done and the installation proceeded, you are safe to start the service. Don't forget to enable it if you want it to start when the LXC containers start
+Once all these steps are done and the installation proceeded, you are safe to start the service.    
+
+Don't forget to enable it if you want it to start when the LXC containers start   
 ```
 # Enable the service:
 systemctl enable influxdb
@@ -96,5 +63,55 @@ systemctl enable influxdb
 # Start the service
 systemctl start influxdb
 ```
-Then, you can start to configure your InfluxDB. InfluxDB generally runs on the port 8086 of your container, so you'll need to access the web interface using this port to configure InfluxDB directly   
-The first steps during the initial configuration of InfluxDB consists of creating your admin user, as well as your first Organization and its first bucket
+Then, you can start to configure your InfluxDB, which should run on the port 8086 of your LXC, so you'll need to access the web interface using this port to configure InfluxDB directly  
+
+The first steps during the initial configuration of InfluxDB consists of creating your admin user, as well as your first Organization and its first bucket    
+
+
+### Grafana
+
+> **Specs**
+> - 1 vCpu
+> - 512 MiB memory
+> - 3 GiB storage     
+
+As it is impossible to run Grafana natively if the LXC container is unprivilegied, we'll use docker to properly install it.     
+```
+# Update packages:
+apt update && apt upgrade -y
+
+# Install the dependencies
+apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
+
+# Add the Docker key to verify downloads:
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Add the Docker depot
+
+# Finally, update your packages and install docker and its components
+apt update && apt install -y docker-ce docker-ce-cli containerd.io
+```
+Once all these steps are done and the installation proceeded, you can verify if docker is successfully installed by running ``docker --version``     
+
+Then, you just need to create a Grafana container, using the parameters you desire. Here's what I used to create my Grafana's container:
+```
+# Command to create a Grafana container named "grafana", always restarting unless manually stopped.
+# Grafana configs / dashboards are stored in /var/lib/grafana, in case the container is deleted.
+docker run -d --name=grafana --restart=unless-stopped -p 3000:3000 -v /opt/grafana/data:/var/lib/grafana grafana/grafana:latest
+
+# If you run Grafana the same way I did, you'll also need to do the following:
+mkdir -p /opt/grafana/data
+chown -R grafana:grafana /opt/grafana/data
+chmod -R 755 /opt/grafana/data
+```
+Then, you can start to configure your Grafana, which should run on the port 3000, but can vary depending on your configuration.     
+
+## Dashboards
+
+The entire point of this is to have beautiful dashboards. There are plenty online, but here's the one I'm currently using. I've redone some aspects of the original one, so you'll have the option of mine, or the original     
+
+[Proxmox VE - InfluxDB2](https://grafana.com/grafana/dashboards/23164-proxmox-ve/) (Flux)    
+[Custom version - Proxmox cluster](https://github.com/KelyanDev/Homelab/blob/main/apps/grafana/proxmox-ve.json) (Flux)     
+
+
+
