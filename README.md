@@ -127,16 +127,18 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
     - [X] Grafana
     - [X] Custom Dashboard
     - [ ] Deployment scripts
-- [ ] Backup solutions
-    - [ ] Veeam server configuration
-    - [ ] Proxmox Backup Server
+- [ ] Self hosted cloud
+    - [ ] NextCloud
+    - [ ] Immich
 - [ ] Dashboard
 - [X] Reverse Proxy
     - [X] Nginx Proxy Manager
 - [X] DNS Sinkhole
     - [X] Pi-Hole
 - [ ] VPN
-- [ ] Self hosted cloud
+- [ ] Backup solutions
+    - [ ] Veeam server configuration
+    - [ ] Proxmox Backup Server
 
 <hr />
 
