@@ -15,7 +15,7 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md"><strong>Proxy</strong></a>
     ·
-    <a href="">WIP</a>
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Cloud</a>
     ·
     <a href="">WIP</a>
   </p>
