@@ -89,8 +89,10 @@ apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
 
 # Add the Docker key to verify downloads:
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Add the Docker depot
+apt update && apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
 # Finally, update your packages and install docker and its components
 apt update && apt install -y docker-ce docker-ce-cli containerd.io
