@@ -31,3 +31,13 @@ services:
       - MYSQL_USER=username
       - MYSQL_HOST=db
       - REDIS_HOST=redis
+
+  cron:
+    image: nextcloud:apache
+    restart: always
+    volumes:
+      - ./nextcloud:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
