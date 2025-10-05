@@ -35,7 +35,8 @@ The original documentations might as well be a better source of information, dep
 > - 4 GiB memory
 > - 40 GiB storage
 
-These are the initial steps regarding the installation of Nextcloud natively.   
+These are the initial steps regarding the installation of Nextcloud. 
+The installation is done by using the [Docker compose file](https://github.com/KelyanDev/Homelab/blob/main/cloud/docker-compose.yml) of this repository
 ```
 # Update packages:
 apt update && apt upgrade -y
@@ -55,11 +56,16 @@ apt update && apt install docker-ce docker-ce-cli containerd.io docker-buildx-pl
 
 Once all these steps are done and the installation proceeded, we'll finally be able to start configure Nextcloud   
 
-First, we'll have to prepare the folder in which we'll put the compose.yaml file.  
+First, we'll have to prepare the folder in which we'll put the docker-compose.yml file.  
 ```
-# Enable the service:
+# Create the directory
 mkdir -p /opt/nextcloud
 cd /opt/nextcloud
 
-# WIP
+# Create the docker-compose.yml file - my config file can be found at the beginning
+nano docker-compose.yml
+
+# Create and start the Nextcloud stack
+docker compose up -d
 ```
+Then, you can start to configure and play with your Nextcloud. The initial steps needs you to configure the Admin user and the database user.
