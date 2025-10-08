@@ -21,7 +21,27 @@
   </p>
 </div>
 
-## DNS
+## Files - Images
+
+### Nextcloud
+
+Nextcloud is an open-source, self-hosted file sync and share platform, acting as the best replacment for cloud services such as Google Drive, OneDrive and so on. The basic functionalities starts off as a great and solid base for a self-hosted cloud, and the addition of the multiple add-ons that can be easily added and configured really boost the potential of this on-premise cloud. From collaborative document editing to task management and video conferencing, this service really emphasizes data sovereignty and privacy.
+
+<div align="center">
+  <br />
+  <img src="images/nextcloud-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
+</div>
+
+<br />
+
+## DNS - Reverse Proxy
 
 ### Pi-Hole
 
@@ -34,9 +54,27 @@ Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to p
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Configuration</a>
   ·
-  <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
+  <a href="https://github.com/nextcloud">GitHub</a>
+</div>
+
+<br />
+
+### Nginx Proxy Manager
+
+NGINX Proxy Manager is an open-source web interface that simplifies the management of SSL certificates and the ability to expose secured web services on the Internet. This service is particularly useful to expose and secure trafic of the services I own on the public internet.
+
+<div align="center">
+  <br />
+  <img src="images/nginx-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/NginxProxyManager/nginx-proxy-manager">GitHub</a>
 </div>
 
 <br />
