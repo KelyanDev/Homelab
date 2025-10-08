@@ -34,9 +34,9 @@ Nextcloud is an open-source, self-hosted file sync and share platform, acting as
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Configuration</a>
   ·
-  <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
+  <a href="https://github.com/nextcloud">GitHub</a>
 </div>
 
 <br />
@@ -54,9 +54,9 @@ Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to p
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
   ·
-  <a href="https://github.com/nextcloud">GitHub</a>
+  <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
 </div>
 
 <br />
