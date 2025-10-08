@@ -69,3 +69,87 @@ nano docker-compose.yml
 docker compose up -d
 ```
 Then, you can start to configure and play with your Nextcloud. The initial steps needs you to configure the Admin user and the database user.
+
+#### Collabora
+Making Collabora works can be a mess the first time, so here's my installation and configuration "procedure"
+
+> [!WARNING]
+> This procedure is made to configure Collabora and Nextcloud Office using a **Reverse proxy** !!     
+> I personally used Nginx Proxy manager, but you can use whatever you prefer as long as it can get the job done
+> 
+> Also, this procedure is made for configuring a **dedicated** Collabora server - not the builtin version proposed in the Nextcloud appstore
+
+<br />
+
+**First step: Configuring the DNS**        
+Nextcloud and Collabora must be resolved to a domain (for example, nextcloud.example.com and collabora.example.com) - This way, you'll have no trouble configuring the Nextcloud office instance (which is probably the most ennoying part, cause it won't work and you won't know why)        
+For this step, you can use a domain provider and buy your own custom domain, or configure your own internal domain.        
+
+I personally used both options, as I have Pi-Hole as my main DNS server in my homelab, while my domain provider allows me to connect from Internet
+
+<br />
+
+**Second step: Configuring your reverse proxy**         
+You'll need to activate SSL for this setup to work fine without losing all your hair in the process, so you'll need to configure certificates for Collabora and Nextcloud either using Let's encrypt or your own generated one       
+Then, in your reverse config proxy, make sure that HSTS is enabled, to always redirect HTTP connexions to HTTPS. You can do it manually by adding this:      
+
+```
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+
+# You can also add this in case it doesn't work initially
+X-Forwarded-Proto: https
+```
+
+<br />
+
+**Third step: Configuring the Collabora container**        
+This step consists of creating a new collabora container inside our previous Docker-compose.yml:
+
+```
+collabora:
+    image: collabora/code:latest
+    container_name: collabora
+    restart: unless-stopped
+    environment:
+      - domain=nextcloud\\.example\\.com # I put the previous example here, but you need to put you nextcloud domain name, to allow it to connect to your Collabora server
+      - username=admin
+      - password=password
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=true # These settings will tell your Collabora that 1. It doesn't use SSL and 2. A reverse proxy handles the SSL part
+    ports:
+      - 9980:9980
+```
+
+<br />
+
+**Fourth step: Configuring Nextcloud**        
+This step consists of modifying the config.php file of the Nextcloud server, to trust our proxy and automatically change the protocol.     
+In your config/config.php file on your nextcloud instance:
+
+```
+'trusted_domains' => [
+  'nextcloud.example.com',  # Change this to your own Nextcloud domain - this line tells your Nextcloud to allow connexions using this domain in your browser
+],
+'trusted_proxies' => [
+  '{ReverseProxyIp}',     # Change this part with your reverse proxy IP address
+],
+'overwrite.cli.url' => 'https://nextcloud.example.com',  # Once again, change this line with your own Nextcloud domain - this line tells your Nextcloud to automatically overwrite the URL
+'overwriteprotocol' => 'https',
+```
+
+<br />
+
+**Fifth step: Nextcloud Office configuration**       
+In this step, we'll configure Nextcloud to allow it to talk and connect with our Collabora instance.    
+
+For this, we'll need to connect to our Nextcloud on its domain name in our web browser, using the Admin user. Once connected, we'll go to **Administration parameters** > **Nextcloud Office**     
+You'll need to check the "Use your own server" option, and put in the Collabora's domain name as the URL    
+
+<div align="center">
+  <br />
+  <img src="images/nextcloud_office.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+If your configuration is alright, the green section that you can see above should show and **STAY** (if it doesn't stay and turns to red after some times, it means that your Nextcloud and Collabora are working fine, but your web browser is unable to access the Collabora server using the URL you provided)
+
