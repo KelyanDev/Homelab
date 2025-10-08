@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/KelyanDev/Homelab">
-    <img src="images/logo.png" alt="Logo" width="160" height="160">
+    <img src="logo.png" alt="Logo" width="160" height="160">
   </a>
 
 <h3 align="center">Homelab</h3>
