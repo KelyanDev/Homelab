@@ -88,28 +88,17 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 
 ### Services
 
-#### Metrics & Monitoring
-Regarding the different aspects of data and metrics management, I played around and started using **InfluxDB2** as my metric collector, as well as **Grafana** to pull these metrics and showcases them in a nice dashboard.
+#### Self-hosted services
+I currently run a lot of self-hosted services on my Proxmox server. These services features classics such as DNS sinkholes, certificates manager, self-hosted cloud, and so on.
 
-#### Reverse Proxy
-As my reverse proxy and certificates manager, I started using **Nginx Proxy Manager**, even if I haven't done anything with it yet
+I won't showcase every aspects of these services here, as it would take too much time. But if you're interested, the navigation section on top of each part of this repository can guide you to your destination.
+- General - The general documentation regarding my Homelab (this documentation is the one you're reading right now)
+- Apps - All general informations regarding all of the services that I'm running, summarizing the general knowledge regarding them
+- Monitoring - All the informations related to my monitoring stack, featuring **Grafana** and **InfluxDB**
+- Proxy - All the informations related to my proxy and dns stack, featuring **Pi-Hole** and **Nginx Proxy Manager**
+- Cloud - All the informations and general guides on running a self-hosted cloud, featuring **Nextcloud**
 
-#### Dashboard
-As my main dashboard, I intend to try Homarr
-
-#### DNS Sinkhole
-As my main DNS and DNS sinkhole, I started to use **Pi-Hole**
-
-#### Cloud
-As my main cloud service, I intend to try and play around with Nextcloud. I'll also try Immich if I can
-
-#### Backups
-Regarding my Windows servers backups, I'll play around with Veeam. Regarding my containers, I'll probably mostly use the Proxmox Backup Server
-
-#### Media servers
-I'll try to use Jellyfin as my media and streaming service, but I'll wait until I get a Nas before that
-
-#### Experimental
+#### Experimental services
 For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
 * AD DS/DNS server - To experiment a more "enterprise" infrastructure, and also used to experiment with my Veeam server
 * Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work
