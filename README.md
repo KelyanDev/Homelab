@@ -147,7 +147,7 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 <!-- CONTACT -->
 ## Contact
 
-My Portfolio - [Click here](https://kelyandev.github.io/)
+My Portfolio - [Click here](https://kelyandev.github.io/Portfolio)
 
 Project Link: [https://github.com/KelyanDev/Homelab](https://github.com/KelyanDev/Homelab)
 
