@@ -95,7 +95,7 @@ I won't showcase every aspects of these services here, as it would take too much
 - **General** - The general documentation regarding my Homelab (this documentation is the one you're reading right now)
 - **Apps** - All general informations regarding all of the services that I'm running, summarizing the general knowledge regarding them
 - **Monitoring** - All the informations related to my monitoring stack, featuring **Grafana** and **InfluxDB**
-- **Proxy** - All the informations related to my proxy and dns stack, featuring **Pi-Hole** and **Nginx Proxy Manager**
+- **Proxy** - All the informations related to my proxy and dns stack, featuring **Pi-Hole**, **Nginx Proxy Manager** and my **DDNS**
 - **Cloud** - All the informations and general guides on running a self-hosted cloud, featuring **Nextcloud**
 
 #### Experimental services
