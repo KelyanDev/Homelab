@@ -1,8 +1,8 @@
 <h3 align="center">DNS & Proxy setting</h3>
 
   <p align="center">
-    Regarding my Proxy setup, I'm running a Nginx Proxy Manager LXC with Docker and Docker compose. This repository is my own <strong>Work in Progress</strong> installation guide, featuring the knowledge linked to my reverse proxy setup and how I access my services from outside, but also my Pi-hole config     
-    For the DNS part, as my public IP is dynamic, I had to setup a cloudflare ddns. I setup my own dns updater using a self made script in Go, which can be found here
+    Regarding my Proxy setup, I'm running a Nginx Proxy Manager LXC with Docker and Docker compose. This repository is my own <strong>Work in Progress</strong> installation guide, featuring the knowledge linked to my reverse proxy setup and how I access my services from outside      <br />
+    For the DNS part, as my public IP is dynamic, I had to setup a cloudflare ddns. I setup my own dns updater using a self made script in Go on an Alpine LXC. I also run a Pi-Hole instance as my main DNS server for my network, running in a Debian LXC.
     <br />
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
     <br />
