@@ -36,7 +36,7 @@ The original documentations might as well be a better source of information, dep
 > - 40 GiB storage
 
 These are the initial steps regarding the installation of Nextcloud. 
-The installation is done by using the [Docker compose file](https://github.com/KelyanDev/Homelab/blob/main/cloud/docker-compose.yml) of this repository
+The installation is done by using the [Docker compose file](https://github.com/KelyanDev/Homelab/blob/main/cloud/nextcloud/docker-compose.yml) of this repository
 ```
 # Update packages:
 apt update && apt upgrade -y
