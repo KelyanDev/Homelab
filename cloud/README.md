@@ -153,3 +153,14 @@ You'll need to check the "Use your own server" option, and put in the Collabora'
 
 If your configuration is alright, the green section that you can see above should show and **STAY** (if it doesn't stay and turns to red after some times, it means that your Nextcloud and Collabora are working fine, but your web browser is unable to access the Collabora server using the URL you provided)
 
+<hr/>
+
+### Immich
+
+> **Specs**
+> - 4 vCpu
+> - 6 GiB memory
+> - 80 GiB storage
+
+This section is still **WIP** 
+
