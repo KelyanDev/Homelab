@@ -71,6 +71,7 @@ Then, you can start to configure your InfluxDB, which should run on the port 808
 
 The first steps during the initial configuration of InfluxDB consists of creating your admin user, as well as your first Organization and its first bucket    
 
+<hr/>
 
 ### Grafana
 
