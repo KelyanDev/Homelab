@@ -1,7 +1,7 @@
 <h3 align="center">DNS & Proxy setting</h3>
 
   <p align="center">
-    Regarding my Proxy setup, I'm running a Nginx Proxy Manager LXC with Docker and Docker compose. This repository is my own <strong>Work in Progress</strong> installation guide, featuring the knowledge linked to my reverse proxy setup and how I access my services from outside
+    Regarding my Proxy setup, I'm running a Nginx Proxy Manager LXC with Docker and Docker compose. This repository is my own <strong>Work in Progress</strong> installation guide, featuring the knowledge linked to my reverse proxy setup and how I access my services from outside, but also my Pi-hole config     
     For the DNS part, as my public IP is dynamic, I had to setup a cloudflare ddns. I setup my own dns updater using a self made script in Go, which can be found here
     <br />
     <a href="https://github.com/KelyanDev/Homelab"><strong>Explore the docs »</strong></a>
@@ -24,7 +24,10 @@
 
 ## Installation
 
-For Nginx Proxy manager, this guide assumes that you already have a Debian 13 LXC running. For the DDNS, I used an Alpine linux because of its lightness.  
+The installation steps of each service assume that your LXC is already configured, and that you're connected to it as the root user (no sudo in here, so double check before following this)     
+Regarding these 3 services, here is my recommandation for the OS to run them:
+- **Pi-Hole / Nginx Proxy Manager** - Latest Debian version, for its compatibility and how simple it is to use
+- **CloudFlare DDNS** - Latest Alpine version, for its lightness and its efficiency
 
 The original documentations might as well be a better source of information, depending on your tech stack.
 
@@ -65,6 +68,37 @@ Then, you can start to configure your Nginx Proxy Manager. The admin interface i
 
 The default user / password is ``admin@example.com`` / ``changeme``
 
+<hr />
+
+### Pi-Hole
+
+> **Specs**
+> - 1 vCpu
+> - 512 MiB memory
+> - 2 GiB storage
+
+These are the initial steps regarding the creation of a Pi-Hole instance                   
+   
+```
+# Update packages:
+apt update -y && apt upgrade -y
+
+# CInstall dependencies
+apt install curl gnupg lsb-release ca-certificates -y
+
+# Use the official installation script to install Pi-Hole - MAKE SURE THAT THE SCRIPT IS SAFE
+curl -sSL https://install.pi-hole.net | bash
+```
+Once you installed Pi-Hole, the service should be up and running on the default http port on your host; Just add /admin to the link to access the admin panel (for example: http://10.0.0.1/admin)         
+
+The installation script will generate a default admin password for you - You should probably change it once you connected for the first time     
+It also provides a default blocklist, that you can remove if you want     
+
+Play with the configuration, make sure that it can access Internet and upstream DNS servers, and you can configure it as your network DNS server to let equipments use it ! 
+
+You can find a lot of blocklist online, add them whenever you want to block more things - you can also block your own domains without the need of a list     
+
+<hr />
 
 ### DDNS
 
