@@ -41,6 +41,24 @@ Nextcloud is an open-source, self-hosted file sync and share platform, acting as
 
 <br />
 
+### Immich
+
+Immich is a high-performance, self-hosted photo and video management solution, and is probably the best open-source alternative to Google Photos. It allows users to back-up, organize and manage their media libraries on their own hardware, allowing them to effectively ensure data ownership. It also has a mobile app, with the same functionalities as Google Photos: Facial recognition, location map of your photos, and easy backups.
+
+<div align="center">
+  <br />
+  <img src="images/immich-dashboard.png" alt="Immich Dashboard" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/immich-app">GitHub</a>
+</div>
+
+<br />
+
 ## DNS - Reverse Proxy
 
 ### Pi-Hole
@@ -54,7 +72,7 @@ Probably the most known DNS sinkhole (or network-wide ad-blocker), designed to p
 </div>
 
 <div align="center">
-  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/pi-hole/README.md">Configuration</a>
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/proxy/README.md">Configuration</a>
   ·
   <a href="https://github.com/pi-hole/pi-hole">GitHub</a>
 </div>
@@ -75,6 +93,24 @@ NGINX Proxy Manager is an open-source web interface that simplifies the manageme
   <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Configuration</a>
   ·
   <a href="https://github.com/NginxProxyManager/nginx-proxy-manager">GitHub</a>
+</div>
+
+<br />
+
+### Cloudflare DDNS
+
+A Cloudflare DDNS is a very simple (and probably very light) LXC / docker container used to update your public IP address within your Cloudflare A records using their API. This is a very useful service to run in case your public IP address is dynamic and not static (meaning that it can change every now and often). You can find an official docker container on their github, but I personally used a custom Go script when building my DDNS.
+
+<div align="center">
+  <br />
+  <img src="images/ddns-dashboard.png" alt="DDNS Dashboard / Script" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/proxy/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/favonia/cloudflare-ddns">GitHub</a>
 </div>
 
 <br />
