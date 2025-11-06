@@ -39,7 +39,7 @@ The original documentations might as well be a better source of information, dep
 > - 10 GiB storage
 
 These are the initial steps regarding the installation of Nginx Proxy Manager.    
-The installation is made using this [Docker compose file](https://github.com/KelyanDev/Homelab/blob/main/proxy/docker-compose.yml). You can modify it to create your own, or find an alternative on Internet.   
+The installation is made using this [Docker compose file](https://github.com/KelyanDev/Homelab/blob/main/proxy/npm/docker-compose.yml). You can modify it to create your own, or find an alternative on Internet.   
 ```
 # Update packages:
 apt update && apt upgrade -y
