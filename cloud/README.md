@@ -162,5 +162,41 @@ If your configuration is alright, the green section that you can see above shoul
 > - 6 GiB memory
 > - 80 GiB storage
 
-This section is still **WIP** 
+These steps follow the official installation guide for Immich, which you can find [here](https://docs.immich.app/overview/quick-start/)
+
+```
+# Update packages:
+apt update && apt upgrade -y
+
+# Install the dependencies
+apt install ca-certificates curl gnupg lsb-release apt-transport-https -y
+
+# Add the Docker key to verify downloads and add the repository:
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Finally, update your packages and install Docker & Docker compose
+apt update && apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+```
+
+Once all these steps are done and the installation proceeded, we'll finally be able to install Immich
+
+```
+# Create a repository for your immich instance
+mkdir /tmp/immich-instance && cd /tmp/immich-instance
+
+# Get the official docker-compose file
+wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
+
+# Get the official .env file, in which you'll need to change the config
+wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env
+```
+
+Once all the files are downloaded, you'll be able to change directories for your instance by changing the parameters in the .env file.      
+You can, of course, live it like it is, but I wouldn't recommend it.     
+
+Then, you can simply start your containers, and your immich instance should be up and running.    
+You can access it with the network port 2283.
 
