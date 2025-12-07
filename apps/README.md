@@ -99,7 +99,7 @@ NGINX Proxy Manager is an open-source web interface that simplifies the manageme
 
 ### Cloudflare DDNS
 
-A Cloudflare DDNS is a very simple (and probably very light) LXC / docker container used to update your public IP address within your Cloudflare A records using their API. This is a very useful service to run in case your public IP address is dynamic and not static (meaning that it can change every now and often). You can find an official docker container on their github, but I personally used a custom Go script when building my DDNS.
+A Cloudflare DDNS is a very simple (and a very light) LXC / docker container used to update your public IP address within your Cloudflare A records using their API. This is a very useful service to run in case your public IP address is dynamic and not static (meaning that it can change every now and often). You can find an official docker container on their github, but I personally used a custom Go script when building my DDNS.
 
 <div align="center">
   <br />
