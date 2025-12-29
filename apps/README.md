@@ -21,7 +21,7 @@
   </p>
 </div>
 
-## Files - Images
+## Cloud stack (Files - Images)
 
 ### Nextcloud
 
@@ -59,7 +59,7 @@ Immich is a high-performance, self-hosted photo and video management solution, a
 
 <br />
 
-## DNS - Reverse Proxy
+## Network stack (DNS - Reverse Proxy - VPN)
 
 ### Pi-Hole
 
@@ -111,6 +111,24 @@ A Cloudflare DDNS is a very simple (and a very light) LXC / docker container use
   <a href="https://github.com/KelyanDev/Homelab/blob/main/apps/proxy/README.md">Configuration</a>
   ·
   <a href="https://github.com/favonia/cloudflare-ddns">GitHub</a>
+</div>
+
+<br />
+
+### Wireguard
+
+Wireguard is a modern, fast and lightweight open-source VPN solution designed to provide secure network tunnels with minimal configuration. It allows secure remote access to a private network and protect trafics over untrusted connexions, while still offering excellent performance and very low resource usage. This service allows me to access my network remotely, making the process of patching services a lot easier.
+
+<div align="center">
+  <br />
+  <img src="images/wireguard-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/wireguard">GitHub</a>
 </div>
 
 <br />
