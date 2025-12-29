@@ -29,7 +29,7 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Monitoring</a>
     ·
-    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Proxy</a>
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Network</a>
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Cloud</a>
     ·
