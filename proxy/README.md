@@ -14,7 +14,7 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/monitoring/README.md">Monitoring</a>
     ·
-    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md"><strong>Proxy</strong></a>
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md"><strong>Network</strong></a>
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Cloud</a>
     ·
@@ -156,3 +156,94 @@ Now, your ddns should be correctly configured if you followed every step
 
 To check if your ddns is up and running, just wait 5 minutes and then check your log file. You should see a line specifying that your IP has changed
 
+<hr />
+
+### Wireguard
+
+> **Specs**
+> - 1 vCpu
+> - 256 MiB memory
+> - 2 GiB storage
+
+These are the initial steps regarding the installation of Wireguard in an LXC.    
+The installation is made using the systemd package and running wg-quick.   
+
+First of all, before configuring the actual LXC, we'll need to change the Proxmox configuration to activate the Wiregard node in the kernel. Start by updating and upgrading your Proxmox node (must be running on Proxmox v8.1 or later). Then, run the following:
+```
+# Activate Wireguard module
+modprobe wireguard
+
+# Add the module to the list of modules started during server boot
+echo "wireguard" >> /etc/modules-load.d/modules.conf
+```
+Once Wireguard is activated on the Proxmox host, we can start configuring our Wireguard LXC
+```
+# Update packages:
+apt update && apt upgrade -y
+
+# Install Wireguard
+apt install --no-install-recommends wireguard-tools
+
+# We'll need to activate packet routing on our LXC - run the following:
+sysctl -w net.ipv4.ip_forward=1
+```
+Then, we'll need to configure Wireguard correctly. First, go to the wireguard repository: `cd /etc/wireguard`    
+Once in the Wireguard folder, we'll proceed like this:
+```
+# Apply a umask of 077 - that way only the user will be able to read / write / execute files
+umask 077
+
+# Generate a pair of keys for the Wireguard server
+wg-genkey | tee /etc/wireguard/server.key | wg pubkey > /etc/wireguard/server.pub
+
+# Generate a pair of keys for our first client
+wg-genkey | tee /etc/wireguard/client1.key | wg pubkey > /etc/wireguard/client1.pub
+
+# Create the configuration file "wg0.conf"
+nano wg0.conf
+```
+In the Wireguard server configuration file, add the following lines:
+```
+[Interface]
+PrivateKey = <server-privatekey>  #The private key of the server (server.key)
+Address = 10.0.0.1                #The IP address your server 
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+ListenPort = 51820         #Default Listening port
+
+[Peer]
+PublicKey = <client-publickey>     #The public key of the client1 (client1.pub)
+AllowedIPs = 10.0.0.2/32           #The IP Address Wireguard will give to the client
+PersistentKeepalive = 25           #Use this when behind a NAT / Firewall
+```
+Finally, when you're done with the wg0.conf file, we can finally start the service
+```
+# We'll give root rights on the folder and its subfolders
+chown -R root:root /etc/wireguard
+
+# Remove all the rights from the files except for the file owner
+chown -R og-rwx /etc/wireguard
+
+# Enable and start the service "wg-quick@wg0.service"
+systemctl enable wg-quick@wg0
+systemctl start wg-quick@wg0
+```
+We're finally done with the server configuration !
+
+#### Client configuration
+I won't explain how to install Wireguard for each type of client that exists, because Wireguard can be used on most OS.      
+This part is mainly a template of what the client configuration should look like. Here's the "client.conf" file:
+```
+[Interface]
+PrivateKey = <client-privatekey>     #The private key of your client (client1.key)
+Address = 10.0.0.2/24                #The address we defined in the "AllowedIPs" for this Peer 
+ListenPort = 51820                   #Default listening port - can be modified
+DNS = 8.8.8.8                        #The DNS Server - won't work without that (you can use a private DNS)
+
+[Peer]
+PublicKey = <server-publickey>       #The public key of the server (server.pub)
+Endpoint = <adressepublique:51820    #The public IP of your network gateway, or the FQDN associated with it
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 25             #Useful when working behind a NAT / Firewall
+```
+Using this template, you'll just need to install wireguard on your OS and use this configuration file when creating the tunnel. If done correctly your VPN should now be up and running !
