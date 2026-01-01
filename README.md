@@ -82,7 +82,14 @@ This machine is running my Proxmox server. Handling my windows servers, as well 
 * Ryzen 7 8845HS - 8 cores, 16 threads
 * 32Go DDR5 5600 MHz
 * 1To NVMe SSD
-* 2.5 Gbps LAN 
+* 2.5 Gbps LAN
+
+#### DS1525+ (DSM - NAS)
+My NAS server, used as a main storage for my biggest LXCs
+* Ryzen V1500B - 4 cores, 8 threads
+* 8Go DDR4 ECC SODIMM
+* 5 HDD bays - 2x 4Tb 3.5 HDD
+* 2x 2.5 Gbps LAN
 
 <hr />
 
@@ -94,9 +101,11 @@ I currently run a lot of self-hosted services on my Proxmox server. These servic
 I won't showcase every aspects of these services here, as it would take too much time. But if you're interested, the navigation section on top of each part of this repository can guide you to your destination.
 - **General** - The general documentation regarding my Homelab (this documentation is the one you're reading right now)
 - **Apps** - All general informations regarding all of the services that I'm running, summarizing the general knowledge regarding them
-- **Monitoring** - All the informations related to my monitoring stack, featuring **Grafana** and **InfluxDB**
-- **Proxy** - All the informations related to my proxy and dns stack, featuring **Pi-Hole**, **Nginx Proxy Manager** and my **DDNS**
-- **Cloud** - All the informations and general guides on running a self-hosted cloud, featuring **Nextcloud**
+- **Monitoring** - All the informations related to my monitoring stack, featuring **Grafana** and **InfluxDB** (plus **Telegraf** agents)
+- **Network** - All the informations related to my proxy and dns stack, featuring **Pi-Hole**, **Nginx Proxy Manager**, **DDNS** and my **Wireguard**
+- **Cloud** - All the informations and general guides on running a self-hosted cloud, featuring **Nextcloud** aswell as **Immich**
+- **Media** - All the informations regarding my media stack, featuring **Jellyfin**, **Seer** aswell as **\*arr** services
+- **Storage** - All the informations concerning my general storage and backup solutions, featuring **Proxmox Backup Server**
 
 #### Experimental services
 For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
@@ -111,20 +120,15 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 ### Services roadmap
 
 - [X] Proxmox VE configuration
-- [X] Metric collector / Monitoring
-    - [X] InfluxDB2
-    - [X] Grafana
-    - [X] Custom Dashboard
-    - [ ] Deployment scripts
-- [ ] Self hosted cloud
-    - [X] NextCloud
-    - [ ] Immich
+- [X] Monitoring stack - Cloud stack - Network stack
 - [ ] Dashboard
-- [X] Reverse Proxy
-    - [X] Nginx Proxy Manager
-- [X] DNS Sinkhole
-    - [X] Pi-Hole
-- [ ] VPN
+- [ ] Media stack
+    - [X] Jellyfin
+    - [ ] Seer
+    - [ ] Prowlarr
+    - [ ] Radarr
+    - [ ] Sonarr
+    - [X] qBittorrent
 - [ ] Backup solutions
     - [ ] Veeam server configuration
     - [ ] Proxmox Backup Server
@@ -137,7 +141,7 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
     - [X] Proxmox node
     - [ ] Proxmox cluster 
 - [ ] Switch
-- [ ] NAS
+- [X] NAS
 - [ ] Surveillance
     - [ ] IP Cameras
 - [ ] Other improvements
