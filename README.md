@@ -32,6 +32,10 @@
     <a href="https://github.com/KelyanDev/Homelab/blob/main/proxy/README.md">Network</a>
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/cloud/README.md">Cloud</a>
+    <br />
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/media/README.md">Media</a>
+    ·
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Storage</a>
     ·
     <a href="">WIP</a>
   </p>
