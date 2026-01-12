@@ -37,6 +37,8 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Storage</a>
     ·
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Game</a>
+    ·
     <a href="">WIP</a>
   </p>
 </div>
@@ -110,6 +112,7 @@ I won't showcase every aspects of these services here, as it would take too much
 - **Cloud** - All the informations and general guides on running a self-hosted cloud, featuring **Nextcloud** aswell as **Immich**
 - **Media** - All the informations regarding my media stack, featuring **Jellyfin**, **Seer** aswell as **\*arr** services
 - **Storage** - All the informations concerning my general storage and backup solutions, featuring **Proxmox Backup Server**
+- **Game** - All the informations related to my game servers, featuring **Pterodactyl**
 
 #### Experimental services
 For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
