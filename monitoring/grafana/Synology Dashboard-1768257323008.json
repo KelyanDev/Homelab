@@ -1,0 +1,2234 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Grafana Dashboard for Synology Devices, collecting SNMP using Telegraf, and InfluxDB",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Synology Quick Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "This panel displays all the needed Synology information of the unit you are running.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-purple",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-purple",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Model"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "deckbytes"
+              },
+              {
+                "id": "displayName",
+                "value": "Total RAM"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "C"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Number of Disks"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "D"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Number of CPU Cores"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "E"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "h"
+              },
+              {
+                "id": "displayName",
+                "value": "Uptime"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "F"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Number of Ethernet Ports"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "G"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "DSM Version"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "repeat": "synologyhostname",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"synoSystem.modelName\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> keep(columns: [\"_value\"])\r\n  |> distinct(column: \"_value\")\r\n  |> group() \r\n  |> last() \r\n  |> keep(columns: [\"_value\"]) ",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"synoSystem.version\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> keep(columns: [\"_value\"])\r\n  |> distinct(column: \"_value\")\r\n  |> group() \r\n  |> last() \r\n  |> keep(columns: [\"_value\"]) ",
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"memory.memTotalReal\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> group() \r\n  |> last() \r\n  |> keep(columns: [\"_value\"]) \r\n",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"systemStats.ssCpuNumCpus\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> group() \r\n  |> last() \r\n  |> keep(columns: [\"_value\"]) ",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.disk\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> keep(columns: [\"diskID\"])\r\n  |> distinct(column: \"diskID\")\r\n  |> group()\r\n  |> count()",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.network\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> keep(columns: [\"ifDescrEX\"])\r\n  |> distinct(column: \"ifDescrEX\")\r\n  |> group()\r\n  |> count()",
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"hrSystem.hrSystemUptime\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> map(fn: (r) => ({r with _value: r._value / 360000}))\r\n  |> group() \r\n  |> last() \r\n  |> keep(columns: [\"_value\"]) \r\n\r\n",
+          "refId": "E"
+        }
+      ],
+      "title": "Synology Overview - $synologyhostname",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "calculateField",
+          "options": {
+            "alias": "",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "_value",
+                "enclosureModel"
+              ],
+              "reducer": "lastNotNull"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "disabled": true,
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 18,
+      "panels": [],
+      "title": "Synology Temperature",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Normal"
+                },
+                "2": {
+                  "color": "dark-red",
+                  "index": 1,
+                  "text": "Failed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "CPU FAN"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "System FAN"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 0,
+        "y": 7
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "repeat": "synologyhostname",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"synoSystem.cpuFanStatus\")\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"synoSystem.systemFanStatus\")\r\n  |> yield(name: \"last\")",
+          "refId": "B"
+        }
+      ],
+      "title": "FAN Status - $synologyhostname",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "System Temperature",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-orange",
+                "value": 70
+              },
+              {
+                "color": "dark-red",
+                "value": 85
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 7,
+        "y": 7
+      },
+      "id": 5,
+      "interval": "5m",
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "repeat": "synologyhostname",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"synoSystem.temperature\")\r\n  |> aggregateWindow(every: ${interval}, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "System Temperatures - $synologyhostname",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "${__field.labels.diskID}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-orange",
+                "value": 50
+              },
+              {
+                "color": "dark-red",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 14,
+        "x": 10,
+        "y": 7
+      },
+      "id": 11,
+      "interval": "5m",
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "vertical",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.1.1",
+      "repeat": "synologyhostname",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.disk\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"diskTemperature\")\r\n  |> aggregateWindow(every: ${interval}, fn: last, createEmpty: false)\r\n  |> yield(name: \"last\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Temperatures - $synologyhostname",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 26,
+      "panels": [],
+      "title": "Synology Overall Status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "${__field.labels.serviceName}",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 10
+              },
+              {
+                "color": "dark-orange",
+                "value": 50
+              },
+              {
+                "color": "dark-red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 13
+      },
+      "id": 25,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {},
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.services\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"serviceUsers\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Services",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "3": {
+                        "color": "dark-orange",
+                        "index": 1,
+                        "text": "Warning"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "from": 1,
+                      "result": {
+                        "color": "dark-green",
+                        "index": 0,
+                        "text": "Normal"
+                      },
+                      "to": 2
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 4,
+                      "result": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "Failed"
+                      },
+                      "to": 5
+                    },
+                    "type": "range"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Temperature"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "celsius"
+              },
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "dark-green",
+                      "value": 0
+                    },
+                    {
+                      "color": "dark-orange",
+                      "value": 50
+                    },
+                    {
+                      "color": "dark-red",
+                      "value": 60
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 13
+      },
+      "id": 27,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.disk\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"diskModel\" or r[\"_field\"] == \"diskStatus\" or r[\"_field\"] == \"diskType\" or r[\"_field\"] == \"diskTemperature\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> last()\r\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> group()",
+          "refId": "A"
+        }
+      ],
+      "title": "Disks Overview",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "diskID",
+                "diskModel",
+                "diskStatus",
+                "diskTemperature",
+                "diskType"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "diskID": 0,
+              "diskModel": 2,
+              "diskStatus": 3,
+              "diskTemperature": 4,
+              "diskType": 1
+            },
+            "renameByName": {
+              "diskID": "Disk",
+              "diskIndex": "",
+              "diskModel": "Model",
+              "diskStatus": "Status",
+              "diskTemperature": "Temperature",
+              "diskType": "Type"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 22,
+      "panels": [],
+      "title": "Synology System Usage",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "CPU usage %",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-orange",
+                "value": 70
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "User"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#3ce39d",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "System"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#4cb0f0",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "I/O Wait"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5b6adf",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 21
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "numCpus = from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"systemStats.ssCpuNumCpus\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> aggregateWindow(every: 1m, fn: mean)\r\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> keep(columns: [\"_time\", \"_start\", \"_stop\", \"host\", \"agent_host\", \"systemStats.ssCpuNumCpus\"])\r\n\r\nstats = from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"systemStats.ssCpuRawSystem\" or r[\"_field\"] == \"systemStats.ssCpuRawUser\" or r[\"_field\"] == \"systemStats.ssCpuRawWait\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> derivative()\r\n  |> aggregateWindow(every: 1m, fn: mean)\r\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> keep(columns: [\"_time\", \"_start\", \"_stop\", \"host\", \"agent_host\", \"systemStats.ssCpuRawSystem\", \"systemStats.ssCpuRawUser\", \"systemStats.ssCpuRawWait\"])\r\n\r\njoin(\r\n    tables: { numCpus: numCpus, stats: stats },\r\n    on: [\"_time\", \"_start\", \"_stop\"]\r\n  )\r\n  |> map(fn: (r) => ({\r\n    r with\r\n    \"systemStats.ssCpuRawSystem\": r[\"systemStats.ssCpuRawSystem\"] / float(v: r[\"systemStats.ssCpuNumCpus\"]),\r\n    \"systemStats.ssCpuRawUser\": r[\"systemStats.ssCpuRawUser\"] / float(v: r[\"systemStats.ssCpuNumCpus\"]),\r\n    \"systemStats.ssCpuRawWait\": r[\"systemStats.ssCpuRawWait\"] / float(v: r[\"systemStats.ssCpuNumCpus\"]),\r\n  }))\r\n  |> drop(columns: [\"systemStats.ssCpuNumCpus\"])",
+          "refId": "C"
+        }
+      ],
+      "title": "CPU Usage",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "host_numCpus"
+            ],
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_time": false,
+              "host_numCpus": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "host_numCpus": "",
+              "systemStats.ssCpuRawSystem": "System",
+              "systemStats.ssCpuRawSystem {_start=\"2024-01-01 22:50:18.623 +0000 UTC\", _stop=\"2024-01-02 10:50:18.624 +0000 UTC\", agent_host_numCpus=\"192.168.1.221\", agent_host_stats=\"192.168.1.221\", host_numCpus=\"tig-monitor\", host_stats=\"tig-monitor\"}": "System",
+              "systemStats.ssCpuRawUser": "User",
+              "systemStats.ssCpuRawUser {_start=\"2024-01-01 22:50:18.623 +0000 UTC\", _stop=\"2024-01-02 10:50:18.624 +0000 UTC\", agent_host_numCpus=\"192.168.1.221\", agent_host_stats=\"192.168.1.221\", host_numCpus=\"tig-monitor\", host_stats=\"tig-monitor\"}": "User",
+              "systemStats.ssCpuRawWait": "I/O Wait",
+              "systemStats.ssCpuRawWait {_start=\"2024-01-01 22:50:18.623 +0000 UTC\", _stop=\"2024-01-02 10:50:18.624 +0000 UTC\", agent_host_numCpus=\"192.168.1.221\", agent_host_stats=\"192.168.1.221\", host_numCpus=\"tig-monitor\", host_stats=\"tig-monitor\"}": "I/O Wait"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "RAM usage %",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "decimals": 0,
+          "displayName": "RAM - ${__field.labels.agent_host}",
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#69cf12",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "RAM - ${__field.labels.agent_host}"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "id": 10,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"memory.memTotalReal\" or r[\"_field\"] == \"memory.memAvailReal\" or r[\"_field\"] == \"memory.memBuffer\" or r[\"_field\"] == \"memory.memCached\")\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> map(fn: (r) => ({ \r\n      r with \r\n      _value: 100.0 - ((float(v: r[\"memory.memAvailReal\"]) + float(v: r[\"memory.memBuffer\"]) + float(v: r[\"memory.memCached\"])) / float(v: r[\"memory.memTotalReal\"]) * 100.0) \r\n  }))\r\n  |> group(columns: [\"source\", \"_field\", \"agent_host\"])\r\n  |> aggregateWindow(every: ${interval}, fn: mean, createEmpty: false)\r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "RAM Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Traffic Sent",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "displayName": "${__field.labels.ifName} in - ${__field.labels.agent_host}",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "KBs"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              },
+              {
+                "id": "displayName",
+                "value": "${__field.labels.ifName} out - ${__field.labels.agent_host}"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-RdYlGr"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 6,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.network\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ifHCOutOctets\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> group(columns: [\"ifName\",\"agent_host\"])\r\n  |> derivative(unit: 1s, nonNegative: true)\r\n  |> aggregateWindow(every: ${interval}, fn: last, createEmpty: false)\r\n  |> yield(name: \"nonnegative derivative\")\r\n",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.network\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ifHCInOctets\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> group(columns: [\"ifName\",\"agent_host\"])\r\n  |> derivative(unit: 1s, nonNegative: true)\r\n  |> aggregateWindow(every: ${interval}, fn: last, createEmpty: false)\r\n  |> yield(name: \"nonnegative derivative\")",
+          "refId": "B"
+        }
+      ],
+      "title": "Network Usage - Traffic Sent",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Temperatures in C",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.disk\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"diskTemperature\")\r\n  |> map(fn: (r) => ({ \"_time\": r[\"_time\"], \"_field\": \"CPU\", \"_value\": r[\"_value\"] }))\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.disk\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"diskTemperature\")\r\n  |> map(fn: (r) => ({ \"_time\": r[\"_time\"], \"_field\": r[\"diskID\"], \"_value\": r[\"_value\"] }))\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "B"
+        }
+      ],
+      "title": "Temperatures",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "${__field.labels.hrStorageDescr}",
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              },
+              {
+                "color": "dark-yellow",
+                "value": 65
+              },
+              {
+                "color": "dark-orange",
+                "value": 75
+              },
+              {
+                "color": "dark-red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 35
+      },
+      "id": 15,
+      "interval": "5m",
+      "options": {
+        "displayMode": "lcd",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.volume\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> filter(fn: (r) => r[\"_field\"] == \"hrStorageUsed\" or r[\"_field\"] == \"hrStorageSize\")\r\n  |> filter(fn: (r) => r[\"hrStorageDescr\"] =~ /^\\/volume\\d+/)\r\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\r\n  |> map(fn: (r) => ({ r with _value: (float(v: r.hrStorageUsed) / float(v: r.hrStorageSize) * 100.0) }))\r\n  |> aggregateWindow(every: ${interval}, fn: last, createEmpty: false)\r\n  |> drop(columns: [\"hrStorageSize\", \"hrStorageUsed\"])\r\n  |> yield(name: \"last\")\r\n  \r\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Volume Usage",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_value": false,
+              "sysVolumeFreeSize": true,
+              "sysVolumeTotalSizeEX": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "IOPS",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "iops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Read #${__field.labels.storageIODevice} - ${__field.labels.agent_host}"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Writes #${__field.labels.storageIODevice} - ${__field.labels.agent_host}"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 14,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.storageIO\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"storageIOReads\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> derivative()\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.storageIO\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"storageIOWrites\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> derivative()\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "B"
+        }
+      ],
+      "title": "Disk IOPS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "deygp467pfy80b"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "MiB/s",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 30,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "binBps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "A"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Read #${__field.labels.storageIODevice} - ${__field.labels.agent_host}"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Writes #${__field.labels.storageIODevice} - ${__field.labels.agent_host}"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 42
+      },
+      "id": 24,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.storageIO\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"storageIONReadX\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> derivative()\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "deygp467pfy80b"
+          },
+          "hide": false,
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology.storageIO\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"storageIONWrittenX\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] =~ /${synologyhostname:regex}/)\r\n  |> derivative()\r\n  |> aggregateWindow(every: ${interval}, fn: mean)",
+          "refId": "B"
+        }
+      ],
+      "title": "Disk Throughput",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "5m",
+  "schemaVersion": 41,
+  "tags": [
+    "synology"
+  ],
+  "templating": {
+    "list": [
+      {
+        "auto": true,
+        "auto_count": 100,
+        "auto_min": "30s",
+        "current": {
+          "text": "$__auto",
+          "value": "$__auto"
+        },
+        "label": "Sampling",
+        "name": "interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "deygp467pfy80b"
+        },
+        "definition": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] != \"\")\r\n  |> keep(columns: [\"agent_host\"])\r\n  |> distinct(column: \"agent_host\")\r\n  |> group()\r\n  \r\n",
+        "description": "Synology Hostname Variable",
+        "includeAll": true,
+        "label": "Hostname",
+        "multi": true,
+        "name": "synologyhostname",
+        "options": [],
+        "query": {
+          "0": "f",
+          "1": "r",
+          "2": "o",
+          "3": "m",
+          "4": "(",
+          "5": "b",
+          "6": "u",
+          "7": "c",
+          "8": "k",
+          "9": "e",
+          "10": "t",
+          "11": ":",
+          "12": " ",
+          "13": "v",
+          "14": ".",
+          "15": "d",
+          "16": "e",
+          "17": "f",
+          "18": "a",
+          "19": "u",
+          "20": "l",
+          "21": "t",
+          "22": "B",
+          "23": "u",
+          "24": "c",
+          "25": "k",
+          "26": "e",
+          "27": "t",
+          "28": ")",
+          "29": "\r",
+          "30": "\n",
+          "31": " ",
+          "32": " ",
+          "33": "|",
+          "34": ">",
+          "35": " ",
+          "36": "r",
+          "37": "a",
+          "38": "n",
+          "39": "g",
+          "40": "e",
+          "41": "(",
+          "42": "s",
+          "43": "t",
+          "44": "a",
+          "45": "r",
+          "46": "t",
+          "47": ":",
+          "48": " ",
+          "49": "v",
+          "50": ".",
+          "51": "t",
+          "52": "i",
+          "53": "m",
+          "54": "e",
+          "55": "R",
+          "56": "a",
+          "57": "n",
+          "58": "g",
+          "59": "e",
+          "60": "S",
+          "61": "t",
+          "62": "a",
+          "63": "r",
+          "64": "t",
+          "65": ",",
+          "66": " ",
+          "67": "s",
+          "68": "t",
+          "69": "o",
+          "70": "p",
+          "71": ":",
+          "72": " ",
+          "73": "v",
+          "74": ".",
+          "75": "t",
+          "76": "i",
+          "77": "m",
+          "78": "e",
+          "79": "R",
+          "80": "a",
+          "81": "n",
+          "82": "g",
+          "83": "e",
+          "84": "S",
+          "85": "t",
+          "86": "o",
+          "87": "p",
+          "88": ")",
+          "89": "\r",
+          "90": "\n",
+          "91": " ",
+          "92": " ",
+          "93": "|",
+          "94": ">",
+          "95": " ",
+          "96": "f",
+          "97": "i",
+          "98": "l",
+          "99": "t",
+          "100": "e",
+          "101": "r",
+          "102": "(",
+          "103": "f",
+          "104": "n",
+          "105": ":",
+          "106": " ",
+          "107": "(",
+          "108": "r",
+          "109": ")",
+          "110": " ",
+          "111": "=",
+          "112": ">",
+          "113": " ",
+          "114": "r",
+          "115": "[",
+          "116": "\"",
+          "117": "_",
+          "118": "m",
+          "119": "e",
+          "120": "a",
+          "121": "s",
+          "122": "u",
+          "123": "r",
+          "124": "e",
+          "125": "m",
+          "126": "e",
+          "127": "n",
+          "128": "t",
+          "129": "\"",
+          "130": "]",
+          "131": " ",
+          "132": "=",
+          "133": "=",
+          "134": " ",
+          "135": "\"",
+          "136": "s",
+          "137": "n",
+          "138": "m",
+          "139": "p",
+          "140": ".",
+          "141": "S",
+          "142": "y",
+          "143": "n",
+          "144": "o",
+          "145": "l",
+          "146": "o",
+          "147": "g",
+          "148": "y",
+          "149": "\"",
+          "150": ")",
+          "151": "\r",
+          "152": "\n",
+          "153": " ",
+          "154": " ",
+          "155": "|",
+          "156": ">",
+          "157": " ",
+          "158": "f",
+          "159": "i",
+          "160": "l",
+          "161": "t",
+          "162": "e",
+          "163": "r",
+          "164": "(",
+          "165": "f",
+          "166": "n",
+          "167": ":",
+          "168": " ",
+          "169": "(",
+          "170": "r",
+          "171": ")",
+          "172": " ",
+          "173": "=",
+          "174": ">",
+          "175": " ",
+          "176": "r",
+          "177": "[",
+          "178": "\"",
+          "179": "a",
+          "180": "g",
+          "181": "e",
+          "182": "n",
+          "183": "t",
+          "184": "_",
+          "185": "h",
+          "186": "o",
+          "187": "s",
+          "188": "t",
+          "189": "\"",
+          "190": "]",
+          "191": " ",
+          "192": "!",
+          "193": "=",
+          "194": " ",
+          "195": "\"",
+          "196": "\"",
+          "197": ")",
+          "198": "\r",
+          "199": "\n",
+          "200": " ",
+          "201": " ",
+          "202": "|",
+          "203": ">",
+          "204": " ",
+          "205": "k",
+          "206": "e",
+          "207": "e",
+          "208": "p",
+          "209": "(",
+          "210": "c",
+          "211": "o",
+          "212": "l",
+          "213": "u",
+          "214": "m",
+          "215": "n",
+          "216": "s",
+          "217": ":",
+          "218": " ",
+          "219": "[",
+          "220": "\"",
+          "221": "a",
+          "222": "g",
+          "223": "e",
+          "224": "n",
+          "225": "t",
+          "226": "_",
+          "227": "h",
+          "228": "o",
+          "229": "s",
+          "230": "t",
+          "231": "\"",
+          "232": "]",
+          "233": ")",
+          "234": "\r",
+          "235": "\n",
+          "236": " ",
+          "237": " ",
+          "238": "|",
+          "239": ">",
+          "240": " ",
+          "241": "d",
+          "242": "i",
+          "243": "s",
+          "244": "t",
+          "245": "i",
+          "246": "n",
+          "247": "c",
+          "248": "t",
+          "249": "(",
+          "250": "c",
+          "251": "o",
+          "252": "l",
+          "253": "u",
+          "254": "m",
+          "255": "n",
+          "256": ":",
+          "257": " ",
+          "258": "\"",
+          "259": "a",
+          "260": "g",
+          "261": "e",
+          "262": "n",
+          "263": "t",
+          "264": "_",
+          "265": "h",
+          "266": "o",
+          "267": "s",
+          "268": "t",
+          "269": "\"",
+          "270": ")",
+          "271": "\r",
+          "272": "\n",
+          "273": " ",
+          "274": " ",
+          "275": "|",
+          "276": ">",
+          "277": " ",
+          "278": "g",
+          "279": "r",
+          "280": "o",
+          "281": "u",
+          "282": "p",
+          "283": "(",
+          "284": ")",
+          "285": "\r",
+          "286": "\n",
+          "287": " ",
+          "288": " ",
+          "289": "\r",
+          "290": "\n",
+          "query": "from(bucket: \"${Bucket}\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"snmp.Synology\")\r\n  |> filter(fn: (r) => r[\"agent_host\"] != \"\")\r\n  |> keep(columns: [\"agent_host\"])\r\n  |> distinct(column: \"agent_host\")\r\n  |> group()\r\n  \r\n"
+        },
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "synology",
+          "value": "synology"
+        },
+        "definition": "buckets()",
+        "name": "Bucket",
+        "options": [],
+        "query": {
+          "query": "buckets()"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Synology Dashboard",
+  "uid": "cd72833c-70ec-4e77-99c3-36da3ebecdaa",
+  "version": 4
+}
