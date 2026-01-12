@@ -37,7 +37,7 @@
     ·
     <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Storage</a>
     ·
-    <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Game</a>
+    <a href="https://github.com/KelyanDev/Homelab/blob/main/game/README.md">Game</a>
     ·
     <a href="">WIP</a>
   </p>
