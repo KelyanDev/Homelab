@@ -139,6 +139,53 @@ Wireguard is a modern, fast and lightweight open-source VPN solution designed to
 
 <br />
 
+## Backup solutions
+
+### Proxmox Backup Server
+
+Proxmox Backup Server is a powerful, open-source backup solution designed for efficiently saving and restoring virtual machines, containers, and host data. It supports deduplication, compression, and encryption, allowing me to store backups securely while minimizing storage usage. This service ensures that my Proxmox infrastructure can be safely restored in case of failures, making my homelab much more resilient and reliable.
+
+<div align="center">
+  <br />
+  <img src="images/pbs-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/storage/README.md">Configuration</a>
+  ·
+  <a href="https://git.proxmox.com/">Git</a>
+</div>
+
+<br />
+
+
+## Game servers
+
+### Pterodactyl Panel
+
+Pterodactyl Panel is the web interface for managing Pterodactyl Wings daemons. It provides an intuitive dashboard to create, configure, and monitor game servers, user permissions, and resources. This panel makes deploying new servers easy and fast, while centralizing control over all hosted game instances. Thanks to it, I can efficiently manage my homelab’s gaming infrastructure, giving me a clean overview of server statuses and activities.
+
+<div align="center">
+  <br />
+  <img src="images/pterodactyl-dashboard.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+<div align="center">
+  <a href="https://github.com/KelyanDev/Homelab/blob/main/game/README.md">Configuration</a>
+  ·
+  <a href="https://github.com/pterodactyl">GitHub</a>
+</div>
+
+<br />
+
+### Pterodactyl Wings
+
+Pterodactyl Wings is the lightweight, open-source daemon that runs on each server hosting game servers. It manages containerized environments and resource allocation, ensuring that each game server runs in isolation and performs optimally. This service allows me to run multiple game servers efficiently on my hardware while maintaining security and stability, without having to manually manage each server.
+
+<br />
+
 ## Metrics & Monitoring
 
 ### Grafana
