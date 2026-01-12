@@ -127,18 +127,18 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 ### Services roadmap
 
 - [X] Proxmox VE configuration
-- [X] Monitoring stack - Cloud stack - Network stack
+- [X] Monitoring stack - Cloud stack - Network stack - Game servers
 - [ ] Dashboard
 - [ ] Media stack
     - [X] Jellyfin
-    - [ ] Seer
+    - [X] Seer
     - [ ] Prowlarr
     - [ ] Radarr
     - [ ] Sonarr
     - [X] qBittorrent
 - [ ] Backup solutions
     - [ ] Veeam server configuration
-    - [ ] Proxmox Backup Server
+    - [X] Proxmox Backup Server
 
 <hr />
 
