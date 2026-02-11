@@ -231,6 +231,63 @@ systemctl restart nginx
 
 These steps are necessary to configure Pterodactyl Wings on your LXC - they are a lot quicker to execute, and your Wings instance should be running pretty fast.
 
+First of, we'll need to install Docker on the LXC, as all game servers are running inside docker containers.
 ```
-#WIP
+# Install Docker using the official script
+curl -fsSL https://get.docker.com | bash
+
+# Enable Docker
+systemctl enable docker --now
 ```
+Then, we'll create our working dir for the Wing instance:
+```
+# Create the wing directory
+mkdir -p /etc/pterodactyl
+curl -L -o /usr/local/bin/wings "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_$([[ "$(uname -m)" == "x86_64" ]] && echo "amd64" || echo "arm64")"
+chmod u+x /usr/local/bin/wings
+```
+
+Once you created these repositories, we'll then need to create the node on the Pterodactyl Panel instance
+
+<div align="center">
+  <br />
+  <img src="images/pterodactyl-node-create.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+Then, in the "Configuration" section, we'll need to copy the configuration file given by Pterodactyl panel and paste it in a "config.yml" file in the `/etc/pterodactyl` directory
+
+<div align="center">
+  <br />
+  <img src="images/pterodactyl-node-config.png" alt="Logo" width="900"/>
+  <br />
+</div>
+
+Then, finally, we'll just need to create a new service on our LXC for our Wing instance. We'll first create the wings.service file: `nano /etc/systemd/system/wings.service`.     
+Then, we'll paste the following:
+```
+[Unit]
+Description=Pterodactyl Wings Daemon
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+WorkingDirectory=/etc/pterodactyl
+LimitNOFILE=4096
+PIDFile=/var/run/wings/daemon.pid
+ExecStart=/usr/local/bin/wings
+Restart=on-failure
+StartLimitInterval=600
+
+[Install]
+WantedBy=multi-user.target
+```
+
+We now just need to reload our systemd daemon and enable the wings daemon
+```
+systemctl daemon-reload
+systemctl enable wings --now
+```
+
+Now, your wings instance should be up and running ! From the Pterodactyl panel, you can finish configuring it by allocating network ports to your node, you'll need them to create the game servers.
