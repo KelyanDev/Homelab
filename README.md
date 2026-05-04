@@ -97,6 +97,10 @@ My NAS server, used as a main storage for my biggest LXCs
 * 5 HDD bays - 2x 4Tb 3.5 HDD
 * 2x 2.5 Gbps LAN
 
+#### SN300 (Stormshield - Pfsense in the future)
+I'm not really using it right now as I can't upgrade it to recent versions, so I'll put pfsense on it as soon as I can
+* 8x 1 Gbps LAN/WAN/DMZ
+
 <hr />
 
 ### Services
@@ -115,8 +119,7 @@ I won't showcase every aspects of these services here, as it would take too much
 - **Game** - All the informations related to my game servers, featuring **Pterodactyl**
 
 #### Experimental services
-For the most experimental part of this Homelab, I intend to run at least 2 windows servers:
-* AD DS/DNS server - To experiment a more "enterprise" infrastructure, and also used to experiment with my Veeam server
+I also run test servers when I need to test thing for work - these can either be Windows or Linux servers, depending on my needs. Currently running:
 * Veeam server - To experiment and increase my skills towards Veeam infrastructures and backups, mainly focusing on Veeam Backup and Replication while I experiment with Veeam Backup for Office 365 at work
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -127,18 +130,12 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 ### Services roadmap
 
 - [X] Proxmox VE configuration
-- [X] Monitoring stack - Cloud stack - Network stack - Game servers
-- [ ] Dashboard
-- [ ] Media stack
-    - [X] Jellyfin
-    - [X] Seer
-    - [ ] Prowlarr
-    - [ ] Radarr
-    - [ ] Sonarr
-    - [X] qBittorrent
+- [X] Monitoring stack - Cloud stack - Network stack - Game servers - Media stack
+- [ ] Dashboards and monitoring notifications
 - [ ] Backup solutions
     - [ ] Veeam server configuration
     - [X] Proxmox Backup Server
+    - [X] Backup notifications
 
 <hr />
 
@@ -147,8 +144,9 @@ For the most experimental part of this Homelab, I intend to run at least 2 windo
 - [X] Proxmox server
     - [X] Proxmox node
     - [ ] Proxmox cluster 
-- [ ] Switch
+- [ ] Manageable Switch
 - [X] NAS
+- [X] Power Inverter
 - [ ] Surveillance
     - [ ] IP Cameras
 - [ ] Other improvements
@@ -168,6 +166,8 @@ Project Link: [https://github.com/KelyanDev/Homelab](https://github.com/KelyanDe
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+
+I'd like to acknoledge every official documentations linked to my services, as I used all of them.
 
 * [Proxmox Documentation](https://pve.proxmox.com/wiki/Main_Page)
 * [Proxmox VE Helper scripts](https://community-scripts.github.io/ProxmoxVE/)
